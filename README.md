@@ -59,7 +59,7 @@ Browser-to-server web chat is disabled in this fork. The web UI message display 
 
 ## JDBC Drivers
 
-Database storage classes for MySQL and MariaDB are present, but JDBC drivers are not bundled into the plugin. Dynmap first checks whether the configured driver is already available on the server classpath. If not, set `storage/driver-jar` and optionally `storage/driver-class` in `configuration.txt` to load a driver JAR from Dynmap's data folder, for example `drivers/mariadb-java-client.jar`.
+Database storage classes for MySQL and MariaDB are present. Dynmap first checks whether the configured driver is already available on the server classpath. If not, set `storage/driver-jar` and optionally `storage/driver-class` in `configuration.txt` to load a driver JAR from Dynmap's data folder, for example `drivers/mariadb-java-client-3.5.9.jar`.
 
 ## External Web Server and Live Data URLs
 
