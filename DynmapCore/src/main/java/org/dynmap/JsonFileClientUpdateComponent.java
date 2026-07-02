@@ -267,12 +267,39 @@ private static class FileToWrite {
     private String getWebURL(DynmapCore core, String key, String externalDefault, String internalDefault) {
         String configured = core.configuration.getString("url/" + key, null);
         if (configured != null) {
+            if (useInternalStorageEndpoints(core, externalDefault) && isKnownStandalonePhpOverride(key, configured)) {
+                Log.warning("Ignoring url/" + key + " PHP standalone override while internal webserver storage endpoints are enabled: " + configured);
+                return internalDefault;
+            }
             return configured;
         }
         if (useInternalStorageEndpoints(core, externalDefault)) {
             return internalDefault;
         }
         return externalDefault;
+    }
+
+    private boolean isKnownStandalonePhpOverride(String key, String configured) {
+        String value = configured.trim();
+        if ("configuration".equals(key)) {
+            return "standalone/MySQL_configuration.php".equals(value)
+                    || "standalone/configuration.php".equals(value);
+        }
+        if ("update".equals(key)) {
+            return "standalone/MySQL_update.php?world={world}&ts={timestamp}".equals(value)
+                    || "standalone/update.php?world={world}&ts={timestamp}".equals(value);
+        }
+        if ("tiles".equals(key)) {
+            return "standalone/MySQL_tiles.php?tile=".equals(value)
+                    || "standalone/SQLite_tiles.php?tile=".equals(value)
+                    || "standalone/tiles.php?tile=".equals(value);
+        }
+        if ("markers".equals(key)) {
+            return "standalone/MySQL_markers.php?marker=".equals(value)
+                    || "standalone/SQLite_markers.php?marker=".equals(value)
+                    || "standalone/markers.php?marker=".equals(value);
+        }
+        return false;
     }
 
     private boolean useInternalStorageEndpoints(DynmapCore core, String externalDefault) {

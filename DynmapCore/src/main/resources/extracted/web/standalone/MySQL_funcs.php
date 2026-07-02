@@ -1,6 +1,9 @@
 <?php
 declare(strict_types=1);
 
+ini_set('display_errors', '0');
+ini_set('log_errors', '1');
+
 mysqli_report(MYSQLI_REPORT_OFF);
 
 function dynmap_request_string(string $key, string $default = ''): string
@@ -63,7 +66,7 @@ function initDbIfNeeded(): mysqli
     if (!$db instanceof mysqli) {
         throw new RuntimeException('Could not initialize mysqli');
     }
-    if (!$db->real_connect('p:' . $host, $user, $password, dynmap_database_name(), $port)) {
+    if (!$db->real_connect($host, $user, $password, dynmap_database_name(), $port)) {
         throw new RuntimeException('Error opening database');
     }
     $db->set_charset('utf8mb4');
