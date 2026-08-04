@@ -63,7 +63,7 @@ function initDbIfNeeded(): mysqli
     if (!$db instanceof mysqli) {
         throw new RuntimeException('Could not initialize mysqli');
     }
-    if (!$db->real_connect('p:' . $host, $user, $password, dynmap_database_name(), $port)) {
+    if (!$db->real_connect($host, $user, $password, dynmap_database_name(), $port)) {
         throw new RuntimeException('Error opening database');
     }
     $db->set_charset('utf8mb4');
