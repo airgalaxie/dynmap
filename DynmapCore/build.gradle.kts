@@ -53,9 +53,10 @@ tasks {
             include(dependency(libs.owaspJava8Shim))
             include(dependency(libs.owaspJava10Shim))
             include(dependency(":DynmapCoreAPI"))
-            exclude("META-INF/maven/**")
-            exclude("META-INF/services/**")
         }
+        exclude("META-INF/maven/**")
+        exclude("META-INF/services/**")
+
         relocate("org.json.simple", "org.dynmap.json.simple")
         relocate("org.yaml.snakeyaml", "org.dynmap.snakeyaml")
         relocate("org.owasp.html", "org.dynmap.org.owasp.html")
