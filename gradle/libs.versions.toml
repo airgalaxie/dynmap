@@ -10,6 +10,7 @@ luckperms = "5.5"
 vault = "1.7.1"
 groupManager = "2.10.1"
 pluginYmlPaper = "0.9.0"
+mariadbJavaClient = "3.5.9"
 
 [libraries]
 paperApi = { group = "io.papermc.paper", name = "paper-api", version.ref = "paper" }
@@ -23,6 +24,7 @@ gson = { group = "com.google.code.gson", name = "gson", version.ref="gson" }
 luckpermsApi = { group = "net.luckperms", name = "api", version.ref="luckperms" }
 vaultApi = { group = "com.github.MilkBowl", name = "VaultAPI", version.ref="vault" }
 groupManager = { group = "org.anjocaido", name = "EssentialsGroupManager", version.ref="groupManager" }
+mariadbJavaClient = { group = "org.mariadb.jdbc", name = "mariadb-java-client", version.ref="mariadbJavaClient" }
 
 [plugins]
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }

@@ -1,6 +1,9 @@
 <?php
 declare(strict_types=1);
 
+ini_set('display_errors', '0');
+ini_set('log_errors', '1');
+
 mysqli_report(MYSQLI_REPORT_OFF);
 
 function dynmap_request_string(string $key, string $default = ''): string

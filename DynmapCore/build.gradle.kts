@@ -5,6 +5,12 @@ plugins {
 
 description = "DynmapCore"
 
+val jdbcDrivers by configurations.creating {
+    isCanBeConsumed = false
+    isCanBeResolved = true
+    isTransitive = false
+}
+
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(25)
@@ -19,10 +25,15 @@ dependencies {
     implementation(libs.owaspJava8Shim)
     implementation(libs.owaspJava10Shim)
     implementation(libs.gson)
+    add(jdbcDrivers.name, libs.mariadbJavaClient)
 }
 
 tasks {
     processResources {
+        from(jdbcDrivers) {
+            into("extracted/drivers")
+        }
+
         // replace stuff in mcmod.info, nothing else
         filesMatching(
             listOf(

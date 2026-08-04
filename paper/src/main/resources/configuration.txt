@@ -44,7 +44,8 @@ deftemplatesuffix: hires
 ### Default image format for HDMaps (png, jpg, jpg-q75, jpg-q80, jpg-q85, jpg-q90, jpg-q95, jpg-q100, webp, webp-q75, webp-q80, webp-q85, webp-q90, webp-q95, webp-q100, webp-l),
 ### Note: any webp format requires the presence of the 'webp command line tools' (cwebp, dwebp) (https://developers.google.com/speed/webp/download)
 ### Has no effect on maps with explicit format settings
-image-format: jpg-q90
+### Default aktiv in this Frok webp-q80
+image-format: webp-q80
 
 ### If cwebp or dwebp are not on the PATH, use these settings to provide their full path.  Do not use these settings if the tools are on the PATH
 ### For Windows, include .exe
@@ -88,7 +89,7 @@ storage:
   #prefix: ""
   #flags: "?allowReconnect=true"
   ### Optional MariaDB JDBC driver loading.
-  #driver-jar: "drivers/mariadb-java-client.jar"
+  #driver-jar: "drivers/mariadb-java-client-3.5.9.jar"
   #driver-class: "org.mariadb.jdbc.Driver"
 
 ### ---------------------------------------------------------------------------
@@ -151,12 +152,18 @@ login-enabled: false
 ### Require login to access website (requires login-enabled: true)
 login-required: false
 
-### URL for client configuration (only need to be tailored for proxies or other non-standard configurations)
+### URLs written to web/standalone/config.js for the browser client.
+### Leave these commented for the normal defaults:
+### - internal webserver + SQL storage uses Java-backed routes (up/... and storage/...)
+### - filetree storage uses generated standalone JSON files and web/tiles
+### Uncomment only for an external PHP webserver or a custom reverse-proxy/CDN setup.
+### Known relative standalone PHP examples are ignored while internal storage endpoints are active.
+### External SQL/PHP deployments should use the standalone/MySQL_*.php examples below.
 url:
     ### configuration URL
-    #configuration: "up/configuration"
+    #configuration: "standalone/MySQL_configuration.php"
     ### update URL
-    #update: "up/world/{world}/{timestamp}"
+    #update: "standalone/MySQL_update.php?world={world}&ts={timestamp}"
     ### browser-to-server chat URL (unused while web-to-server chat is disabled)
     #sendmessage: "up/sendmessage"
     ### login URL (unused while login support is disabled)
@@ -164,9 +171,9 @@ url:
     ### register URL (unused while login support is disabled)
     #register: "up/register"
     ### tiles base URL
-    #tiles: "tiles/"
+    #tiles: "standalone/MySQL_tiles.php?tile="
     ### markers base URL
-    #markers: "tiles/"
+    #markers: "standalone/MySQL_markers.php?marker="
 
 ### Messages to customize
 msg:

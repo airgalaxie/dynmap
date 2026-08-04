@@ -4741,6 +4741,7 @@ modellist:id=%dropper,state=facing:down,box=0.000000/0.000000/0.000000:16.000000
 [26.2-]boxblock:id=sulfur_slab,id=polished_sulfur_slab,id=sulfur_brick_slab,id=cinnabar_slab,id=polished_cinnabar_slab,id=cinnabar_brick_slab,state=type:top,ymin=0.5
 [26.2-]boxblock:id=sulfur_slab,id=polished_sulfur_slab,id=sulfur_brick_slab,id=cinnabar_slab,id=polished_cinnabar_slab,id=cinnabar_brick_slab,state=type:bottom,ymax=0.5
 [26.2-]customblock:id=sulfur_wall,id=polished_sulfur_wall,id=sulfur_brick_wall,id=cinnabar_wall,id=polished_cinnabar_wall,id=cinnabar_brick_wall,class=org.dynmap.hdmap.renderer.FenceWallBlockStateRenderer,type=tallwall
+[26.2-]patchblock:id=sulfur_spike,patch0=VertX1Z0ToX0Z1,patch1=VertX1Z0ToX0Z1@90
 
 # The Expedition 26.3
 [26.3-]customblock:id=poplar_stairs,class=org.dynmap.hdmap.renderer.StairStateRenderer
