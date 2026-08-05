@@ -6080,6 +6080,9 @@ block:id=%melon_stem,patch0=0:melon_stem,blockcolor=foliagebiome,transparency=TR
 [26.1-]block:id=potted_golden_dandelion,patch0-5=0:flower_pot,patch6=0:dirt,patch7-8=0:dandelion,transparency=TRANSPARENT
 
 # Chaos Cubed 26.2
+[26.2-]texture:id=quartz_pillar,filename=assets/minecraft/textures/block/quartz_pillar_side.png
+[26.2-]texture:id=purpur_pillar,filename=assets/minecraft/textures/block/purpur_pillar_side.png
+
 [26.2-]texture:id=sulfur,filename=assets/minecraft/textures/block/sulfur.png
 [26.2-]texture:id=polished_sulfur,filename=assets/minecraft/textures/block/polished_sulfur.png
 [26.2-]texture:id=sulfur_bricks,filename=assets/minecraft/textures/block/sulfur_bricks.png
