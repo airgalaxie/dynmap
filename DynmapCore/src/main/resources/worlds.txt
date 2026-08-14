@@ -9,7 +9,7 @@ worlds:
   # Worlds can be handled by templates, based on world type
   # You can override the properties of the template by specifying them in this section
   #    for example 'Title: "My Awesome World"'
-  #- name: world
+  #- name: minecraft:overworld
   #  title: "World"
   #   Use 'enabled: false' to disable a certain world.
   #  enabled: false
@@ -97,7 +97,7 @@ worlds:
   #- name: world2
   #  title: "Second World"
   #
-  #- name: nether
+  #- name: minecraft:the_nether
   #  title: "Nether"
   #  center:
   #    x: 0

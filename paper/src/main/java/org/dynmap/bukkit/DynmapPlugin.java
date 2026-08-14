@@ -109,19 +109,30 @@ public class DynmapPlugin extends JavaPlugin implements DynmapAPI {
     private BukkitVersionHelper helper;
 
     private final BukkitWorld getWorldByName(String name) {
-        if((last_world != null) && (last_world.getName().equals(name))) {
+        if((last_world != null) && (last_bworld.getName().equals(name)
+                || last_bworld.getNameAliases().contains(name))) {
             return last_bworld;
         }
-        return world_by_name.get(name);
+        BukkitWorld world = world_by_name.get(name);
+        if (world != null) {
+            return world;
+        }
+        for (BukkitWorld candidate : world_by_name.values()) {
+            if (candidate.getNameAliases().contains(name)) {
+                return candidate;
+            }
+        }
+        return null;
     }
     private final BukkitWorld getWorld(World w) {
         if(last_world == w) {
             return last_bworld;
         }
-        BukkitWorld bw = world_by_name.get(w.getName());
+        String worldId = w.getKey().toString();
+        BukkitWorld bw = world_by_name.get(worldId);
         if(bw == null) {
             bw = new BukkitWorld(w);
-            world_by_name.put(w.getName(), bw);
+            world_by_name.put(worldId, bw);
         }
         else if(bw.isLoaded() == false) {
             bw.setWorldLoaded(w);
@@ -132,7 +143,7 @@ public class DynmapPlugin extends JavaPlugin implements DynmapAPI {
         return bw;
     }
     final void removeWorld(World w) {
-        world_by_name.remove(w.getName());
+        world_by_name.remove(w.getKey().toString());
         if(w == last_world) {
             last_world = null;
             last_bworld = null;
@@ -910,7 +921,7 @@ public class DynmapPlugin extends JavaPlugin implements DynmapAPI {
     }
     
     private static DynmapLocation toLoc(Location l) {
-        return new DynmapLocation(DynmapWorld.normalizeWorldName(l.getWorld().getName()), l.getBlockX(), l.getBlockY(), l.getBlockZ());
+        return new DynmapLocation(plugin.getWorld(l.getWorld()).getName(), l.getBlockX(), l.getBlockY(), l.getBlockZ());
     }
     
     private void registerPlayerLoginListener() {

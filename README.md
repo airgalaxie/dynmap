@@ -1,3 +1,15 @@
+> ## This project continues as AirMap
+>
+> **Looking for the actively developed version?**
+>
+> Development continues as **AirMap – based on Dynmap®**.
+>
+> **→ [Go to AirMap](https://github.com/airgalaxie/AirMap)**
+>
+> This branch is kept as the historical Dynmap-Paper 26.2 development branch.
+>
+> ---
+
 # Dynmap Paper v26.2
 
 This is a heavily modified **fork** of the [airgalaxie/dynmap-paper](https://github.com/airgalaxie/dynmap-paper) repository, which builds upon the work of [JLyne's fork](https://github.com/JLyne/dynmap) and is based on the original [Dynmap project](https://github.com/webbukkit/dynmap).

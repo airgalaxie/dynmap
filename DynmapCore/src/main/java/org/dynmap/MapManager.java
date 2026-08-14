@@ -176,6 +176,14 @@ public class MapManager {
         DynmapWorld world = worldsLookup.get(name);
         if(world == null)
             world = worldsLookup.get(DynmapWorld.normalizeWorldName(name));
+        if (world == null) {
+            for (DynmapWorld candidate : worlds) {
+                if (candidate.getNameAliases().contains(name)
+                        || candidate.getNameAliases().contains(DynmapWorld.normalizeWorldName(name))) {
+                    return candidate;
+                }
+            }
+        }
         return world;
     }
     

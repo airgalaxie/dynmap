@@ -259,6 +259,10 @@ public abstract class DynmapWorld {
     public String getName() {
         return wname;
     }
+    /** Legacy names accepted for configuration and lookup only. */
+    public List<String> getNameAliases() {
+        return java.util.Collections.emptyList();
+    }
     /* Test if world is nether */
     public abstract boolean isNether();
 

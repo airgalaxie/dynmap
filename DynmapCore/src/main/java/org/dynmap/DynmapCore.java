@@ -1807,6 +1807,15 @@ public class DynmapCore implements DynmapCommonAPI {
         finalConfiguration.put("title", world.getTitle());
         
         ConfigurationNode worldConfiguration = getWorldConfigurationNode(wname);
+        if (worldConfiguration.isEmpty()) {
+            for (String alias : world.getNameAliases()) {
+                worldConfiguration = getWorldConfigurationNode(alias);
+                if (!worldConfiguration.isEmpty()) {
+                    Log.info("Using legacy world configuration '" + alias + "' for '" + wname + "'");
+                    break;
+                }
+            }
+        }
         
         // Get the template.
         ConfigurationNode templateConfiguration = null;

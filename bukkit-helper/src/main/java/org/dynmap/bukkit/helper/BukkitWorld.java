@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.bukkit.Chunk;
@@ -22,11 +24,13 @@ public class BukkitWorld extends DynmapWorld {
     private World world;
     private World.Environment env;
     private boolean skylight;
+    private List<String> legacyNames;
     private DynmapLocation spawnloc = new DynmapLocation();
     
     public BukkitWorld(World w) {
-        this(w.getName(), w.getMaxHeight(), w.getSeaLevel(), w.getEnvironment(),
+        this(w.getKey().toString(), w.getMaxHeight(), w.getSeaLevel(), w.getEnvironment(),
         	BukkitVersionHelper.helper.getWorldMinY(w));
+        legacyNames = getLegacyWorldNames(w);
         setWorldLoaded(w);
     }
     public BukkitWorld(String name, int height, int sealevel, World.Environment env, int miny) {
@@ -34,6 +38,7 @@ public class BukkitWorld extends DynmapWorld {
         world = null;
         this.env = env;
         skylight = (env == World.Environment.NORMAL);
+        legacyNames = Collections.emptyList();
         // Generate non-default environment lighting table
         switch (env) {
             case NETHER:
@@ -48,6 +53,33 @@ public class BukkitWorld extends DynmapWorld {
             default:
                 break;
         }
+    }
+
+    private static List<String> getLegacyWorldNames(World world) {
+        List<String> aliases = new ArrayList<String>();
+        aliases.add(world.getName());
+        switch (world.getEnvironment()) {
+            case NORMAL:
+                aliases.add("world");
+                break;
+            case NETHER:
+                aliases.add("DIM-1");
+                aliases.add("nether");
+                break;
+            case THE_END:
+                aliases.add("DIM1");
+                aliases.add("the_end");
+                break;
+            default:
+                break;
+        }
+        aliases.removeIf(world.getKey().toString()::equals);
+        return Collections.unmodifiableList(aliases);
+    }
+
+    @Override
+    public List<String> getNameAliases() {
+        return legacyNames;
     }
     /**
      * Set world online
@@ -79,7 +111,7 @@ public class BukkitWorld extends DynmapWorld {
             spawnloc.x = sloc.getBlockX();
             spawnloc.y = sloc.getBlockY();
             spawnloc.z = sloc.getBlockZ(); 
-            spawnloc.world = normalizeWorldName(sloc.getWorld().getName());
+            spawnloc.world = getName();
         }
         return spawnloc;
     }
